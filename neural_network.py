@@ -1,9 +1,9 @@
 import numpy as np
-from cost_function import sigmoid
 
 def dense(a_in, W, b, activation_fun):
     """
-    Compute dense layer.
+    Compute dense layer (one kind of layers whoes each neuron output is a function 
+    of all the activation outputs of the previous layer).
     Args:
         a_in (ndarray(1, n)): Data, 1 example
         W (ndarray(n, j)): Weight matrix, n features, j units
@@ -15,7 +15,7 @@ def dense(a_in, W, b, activation_fun):
     return activation_fun(z)
 
 
-def sequential(x, W1, b1, W2, b2, afun1=sigmoid, afun2=sigmoid):
+def sequential(x, W1, b1, W2, b2, afun1, afun2):
     """
     Build a two layer neural network
     """
@@ -23,15 +23,10 @@ def sequential(x, W1, b1, W2, b2, afun1=sigmoid, afun2=sigmoid):
     a2 = dense(a1, W2, b2, afun2)
     return a2
 
-def predict(X, W1, b1, W2, b2, afun1=sigmoid, afun2=sigmoid):
+def predict(X, W1, b1, W2, b2, afun1, afun2):
     m = X.shape[0]
     p = np.zeros((m, 1))
     for i in range(m):
         p[i, 0] = sequential(X[i], W1, b1, W2, b2, afun1, afun2)
     return p
-
-X = np.array([[200, 17]])
-W = np.array([[1, -3, 5],[-2, 4, 6]])
-B = np.array([[-1, 1, 2]])
-out = dense(X, W, B)
 

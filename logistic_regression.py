@@ -1,6 +1,6 @@
 import numpy as np
 import math
-from functions import sigmoid
+from activation_functions import sigmoid
 import copy
 
 def compute_cost_logistic(X, y, w, b, regularized=False, lambda_=1):
